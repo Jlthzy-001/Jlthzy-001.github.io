@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Linux关闭防火墙</title>
+      <link href="/2021/08/28/Linux%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99/"/>
+      <url>/2021/08/28/Linux%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-Ubuntu-Debian">1.Ubuntu/Debian</h2><p>安装ufw</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ufw</span><br></pre></td></tr></table></figure><p>关闭</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw disable</span><br></pre></td></tr></table></figure><p>开启</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw enable</span><br></pre></td></tr></table></figure><p>查看状态</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure><h2 id="2-CentOS">2.CentOS</h2><p>查看防火墙状态</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure><p>停止firewall</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure><p>禁止firewall开机启动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld.service </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vps </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Azure VPS获得Root权限</title>
+      <link href="/2021/08/28/Azure%20VPS%E8%8E%B7%E5%BE%97Root%E6%9D%83%E9%99%90/"/>
+      <url>/2021/08/28/Azure%20VPS%E8%8E%B7%E5%BE%97Root%E6%9D%83%E9%99%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-获得一台AZ-VPS">1.获得一台AZ VPS</h2><p>此处省略1万字</p><h2 id="2-获取权限">2.获取权限</h2><h4 id="Step1：登入1中获得VPS">Step1：登入1中获得VPS</h4><h4 id="Step2：切换用户">Step2：切换用户</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su -</span><br></pre></td></tr></table></figure><h4 id="Step3：设置root密码">Step3：设置root密码</h4><p>运行下面的命令，并输入两次设置的root密码</p><p>这里密码要记录一下，之后要用这个密码登录vps的</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure><h4 id="Step4：修改配置文件">Step4：修改配置文件</h4><p>这里使用vim修改<strong>sshd_config</strong>文件</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure><p>找到下面这行代码，不要去修改保持注释状态</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#PermitRootLogin prohibit-password   // 允许root登录，但是禁止root用密码登录（默认值在文件中是被注释掉的）</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>然后新建一行 添加：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes   //允许root登录，设为yes。</span><br></pre></td></tr></table></figure><p>修改好之后记得保存</p><h4 id="Step5：重启SSH服务">Step5：重启SSH服务</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vps </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>408_计算机组成原理_第1和2章</title>
       <link href="/2021/08/26/408_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86_%E7%AC%AC1%E5%92%8C2%E7%AB%A0/"/>
       <url>/2021/08/26/408_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86_%E7%AC%AC1%E5%92%8C2%E7%AB%A0/</url>
