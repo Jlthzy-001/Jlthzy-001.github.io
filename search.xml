@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>使用Fail2ban防ssh暴破</title>
+      <link href="/2022/01/03/fail2ban%E9%98%B2ssh%E6%9A%B4%E7%A0%B4/"/>
+      <url>/2022/01/03/fail2ban%E9%98%B2ssh%E6%9A%B4%E7%A0%B4/</url>
+      
+        <content type="html"><![CDATA[<h4 id="1-安装fail2ban">1.安装fail2ban</h4><p>CentOS</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install fail2ban</span><br></pre></td></tr></table></figure><p>Debian</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install fail2ban</span><br></pre></td></tr></table></figure><h4 id="2-新建一个sshd的配置">2.新建一个sshd的配置</h4><p>可以使用finalshell直接访问到路径</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fail2ban/jail.d/sshd.local</span><br></pre></td></tr></table></figure><p>eg</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[ssh-iptables]</span><br><span class="line">enabled  = true</span><br><span class="line">filter   = sshd</span><br><span class="line">action   = iptables[name=SSH, port=ssh, protocol=tcp]</span><br><span class="line">logpath  = /var/log/secure</span><br><span class="line">maxretry = 6   # 最多连接6次失败</span><br><span class="line">bantime  = 6048000   # 禁止70天（按秒计算）</span><br></pre></td></tr></table></figure><p>如果是<strong>debian</strong>或<strong>ubuntu</strong>系统，<strong>logpath</strong>需要修改成/var/log/auth.log<br>保存这个文件。</p><h4 id="3-启动">3.启动</h4><p>CentOS 7等使用systemctl方式启动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start fail2ban.service</span><br></pre></td></tr></table></figure><p>老的init启动脚本方式的启动</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service fail2ban start</span><br></pre></td></tr></table></figure><p>Debian</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/fail2ban start</span><br></pre></td></tr></table></figure><h4 id="4-检查进程，防火墙是否生效">4.检查进程，防火墙是否生效</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vps </tag>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>考研英语_小作文素材</title>
       <link href="/2021/12/13/a%E5%B0%8F%E4%BD%9C%E6%96%87%E7%B4%A0%E6%9D%90/"/>
       <url>/2021/12/13/a%E5%B0%8F%E4%BD%9C%E6%96%87%E7%B4%A0%E6%9D%90/</url>
