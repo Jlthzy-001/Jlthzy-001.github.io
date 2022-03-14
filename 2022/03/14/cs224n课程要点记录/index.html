@@ -1,0 +1,398 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>cs224n课程笔记 | Jlthzy's Blog</title><meta name="keywords" content="考研复试,cs224n"><meta name="author" content="Jlthzy"><meta name="copyright" content="Jlthzy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="cs224n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs224n课程笔记">
+<meta property="og:url" content="https://newblog.leohu.me/2022/03/14/cs224n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Jlthzy&#39;s Blog">
+<meta property="og:description" content="cs224n">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg">
+<meta property="article:published_time" content="2022-03-14T15:48:52.374Z">
+<meta property="article:modified_time" content="2022-03-14T15:48:32.661Z">
+<meta property="article:author" content="Jlthzy">
+<meta property="article:tag" content="考研复试">
+<meta property="article:tag" content="cs224n">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://newblog.leohu.me/2022/03/14/cs224n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'cs224n课程笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-14 23:48:32'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jlthzy's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">cs224n课程笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-14T15:48:52.374Z" title="发表于 2022-03-14 23:48:52">2022-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-14T15:48:32.661Z" title="更新于 2022-03-14 23:48:32">2022-03-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95/">考研复试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="cs224n课程笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>写在前面</h1>
+<p>CS224是一个很大且相对基础的讲解NLP的课程，因此不是所有内容对于复试来说都是重点，所以这篇文章会选择性的记录一些有利于复试，有利于项目的知识点</p>
+<p>个人没有太多时间来从头到尾看课程视频，更读的是阅读别人的二手知识+多面化的搜查，因此也会补充一些自己觉得很棒的知识点，用来强化知识点，强化学习。</p>
+<p>话不多说，Let’s GO!</p>
+<h1>CS224N课程</h1>
+<h2 id="1-基础性的概念记录-更新ing">1.基础性的概念记录(更新ing)</h2>
+<p>1.Word embedding 是一个将词向量化的概念，word2vec是谷歌提出一种word embedding 的工具或者算法集合</p>
+<blockquote>
+<p>再细讲一下就是说，Word embedding是一种概念性的宏观的知识，而word2vec是实现这种概念的一种具体的方法，有点像类和实例的关系。</p>
+</blockquote>
+<p>2.word2vec的两类模型</p>
+<blockquote>
+<p>Skip-grams模型：给出一个词，预测其上下文</p>
+<p>CBOW模型：给一个词的上下文，预测这个词</p>
+</blockquote>
+<p>3.Word2vec完全理解</p>
+<blockquote>
+<h4 id="a-引子">a.引子</h4>
+<p>举个例子，我们输入单词the，想要预测单词quick</p>
+<p>则输入是the的one-hot编码，输出是quick的one-hot编码</p>
+<p>假设词典里有10,000个不同的词，则one-hot编码长度为10,000</p>
+<p>假设只有一个隐藏层的全连接网络，则隐藏层对应权重构成两个权重矩阵，如下图👇</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/skip_gram_net_arch2.jpg" width=550/>
+<p><strong>隐层和输入层连接的矩阵为V，其每一行表示词作为中心词时的词向量，输入行向量乘以V正好得到输入词的词向量</strong></p>
+<blockquote>
+<p>现在再来看王佬的视频，是不是有新的感悟</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220313234720.png" width=500/>
+</blockquote>
+<p><strong>隐层和输出层连接的权重矩阵为U，其每一列表示输出层的词的临近词词向量</strong></p>
+<h4 id="b-总结">b.总结</h4>
+<p>什么是词向量？也就是参数矩阵V中的行，一个单词的词向量就对应参数矩阵V的中的一个行。也就是说，参数矩阵/词向量是需要通过学习才能得到的。不妨再剥离出来，词向量就是使用低维向量来表示词的语义信息的向量，注意这里的低维是相对于高维且稀疏的one-hot向量而言。</p>
+</blockquote>
+<p>4.命名实体识别（Named Entity Recognition, NER）</p>
+<blockquote>
+<p>也就是把一个句子中的地点LOC、机构ORG和人名PER识别出来</p>
+</blockquote>
+<p>5.WHY预训练词向量</p>
+<blockquote>
+<p>如果有可用的预训练词向量，则最好使用预训练词向量。因为预训练的词向量通常在很大规模的数据集上进行过训练，词向量的质量还不错</p>
+<p>而某个具体的NLP任务的样本数可能不太多，导致训练得到的词向量还没人家预训练的好。所以，如果实际任务的数据量较小，则用预训练的词向量；否则，可以尝试一下根据实际任务fine tune词向量</p>
+</blockquote>
+<p>5.BP算法</p>
+<blockquote>
+<p>不断使用链式法则对BP算法求导，然后反向传播。在反向传播的过程中，可以利用上游计算好的梯度，增量式的更新下游的梯度，[downstream gradient] = [upstream gradient] × [local gradient]</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/p20.png" width=500/>
+</blockquote>
+<p>6.Dependency Parsing依存分析</p>
+<blockquote>
+<p>指对句子进行语法分析并画出句子成分的依赖关系。主语、谓语、宾语啥子的。</p>
+<p>WHY Dependency Parsing？</p>
+<blockquote>
+<p>a.了解句子结构能更好的理解句子的含义</p>
+<p>b.人们在交流的时候，通过组合简单的句子成分来表达复杂的含义</p>
+<p>c.需要知道句子中成分之间的依赖关系，以此来正确解读句子的含义</p>
+</blockquote>
+</blockquote>
+<h2 id="2-Language-Models-and-RNNs">2.Language Models and RNNs</h2>
+<p>1.n-gram</p>
+<blockquote>
+<p>在前-深度学习时代，人们使用n-gram方法来学习语言模型</p>
+<p>对于一个句子the students opened their</p>
+<ul>
+<li>1-grams (unigrams): “the”, “students”, “opened”, “their”</li>
+<li>2-grams (bigrams): “the students”, “students opened”, “opened their”</li>
+<li>3-grams (trigrams): “the students opened”, “students opened their”</li>
+<li>4-grams: “the students opened their”</li>
+</ul>
+<p><strong>n-gram方法有一个前提假设，即假设每个词出现的概率只和前n-1个词有关，通过前n-1个词语来预测第n个词</strong></p>
+<blockquote>
+<p>n-gram是存在一些问题的，例如我们统计训练集语料库中发现，分母students opened their出现1000次，其后接books即students opened their books出现了400次，所以P(books|students opened their)=400/1000=0.4，类似的，可以算出下一个词为exams的概率是0.1。所以4-gram方法认为下一个词是books的概率更大</p>
+<p>但是，当原始输入句子是as the proctor started the clock, the students opened their的时候，显然，后边结果是books的可能性更大，这也是n-gram存在的问题</p>
+</blockquote>
+<p><strong>这里总结一下n-gram的不足</strong></p>
+<blockquote>
+<p>a.考虑的状态有限。n-gram只能看到前n-1个词，无法建模长距离依赖关系</p>
+<p>b.存储问题，需要存储所有n-gram的频率，如果n越大，这种n-gram的组合越多，所以存储空间呈幂次上升</p>
+<p>c.依赖于语料库，比如生物学中的顶尖优势(用w表示)，显然w在408课程组成的语料库中是稀有的，甚至没有的，但不能草率的认为w这个词不存在</p>
+</blockquote>
+</blockquote>
+<p>2.RNN</p>
+<blockquote>
+<p><strong>RNN结构如下，每一时刻的输入包含两部分，即当前时刻的输入，和上一时刻隐状态的变换</strong></p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314100617.png" width=600/>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314100216.png" width=500/>
+<p><strong>RNN的优势和劣势</strong></p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314100929.png"/>
+<p><strong>RNN理论上能建立长期的依赖关系，但是由于梯度消失和梯度爆炸的问题，学习到的依旧是短期的依赖关系。</strong></p>
+<p><strong>核心问题：RNN在不同的时间步使用共享参数w，导致t+n时刻损失值对于t时刻参数的偏导数存在w的指数形式，当n很大的时候，如果w小于1，就梯度消失；如果w大于1，就梯度爆照</strong></p>
+</blockquote>
+<h2 id="3-Vanishing-Gradients-Fancy-RNNs">3.Vanishing Gradients, Fancy RNNs</h2>
+<p>1.RNN梯度消失和爆炸</p>
+<blockquote>
+<h5 id="a-梯度消失">a.梯度消失</h5>
+<p>核心问题就是RNN在不同时间步使用共享参数W，导致t+n时刻的损失对t时刻的参数的偏导数存在W的指数形式，一旦W很小或很大就会导致梯度消失或梯度爆炸的问题.</p>
+<p>下图形象的显示了梯度消失的问题，即梯度不断反传，沿着箭头方向的梯度不断变小</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314103204.png" width=500/>
+<p><strong>梯度消失带来的明显的问题就是：参数的更新受到临近词的影响更大，距离当前t时刻越远的参数更新就越少。久而久之，因为梯度消失，我们就不知道t时刻是真的对t+n时刻没影响还是因为梯度消失导致我们没学习到这种影响</strong></p>
+<h5 id="b-梯度爆炸">b.梯度爆炸</h5>
+<p>导致参数更新的一瞬间更新非常大，导致网络振荡</p>
+<blockquote>
+<p>梯度爆炸一个比较好的解决方法是梯度裁剪，即如果发现梯度的范数大于某个阈值，则以一定的比例缩小梯度的范数，但不改变其方向</p>
+</blockquote>
+<h5 id="c-总结">c.总结</h5>
+<p>总的来说，梯度爆炸相对好解决，但梯度消失就没那么简单了。在RNN中，每个时刻t，都改写了前一个时刻的隐状态，而由于梯度消失问题，长距离以前的状态对当前时刻的影响又很小，所以导致无法建模长距离依赖关系</p>
+</blockquote>
+<p>2.LSTM</p>
+<blockquote>
+<h5 id="a-模型与计算">a.模型与计算</h5>
+<ul>
+<li>
+<p>从宏观上来说，LSTM的隐层神经元不仅包含隐状态h，还专门开辟了一个cell来保存过去的“记忆”c，LSTM希望用c来传递很久以前的信息，以达到长距离依赖的目的。所以LSTM隐层神经元的输入是上一时刻的隐状态h和记忆c，输出是当前时刻的隐状态h和希望传递给下一个时刻的记忆c。</p>
+</li>
+<li>
+<p>在当前输入时刻t，LSTM设置了遗忘门f和输入们i，f和i都由上一时刻的隐层状态h和当前时刻的输入计算而得</p>
+</li>
+<li>
+<p>输出门o控制哪些记忆需要输出到下一个隐层状态</p>
+<p>看图就可以了，没啥好说的</p>
+</li>
+</ul>
+<center class="half">
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314112752.png" width=500/>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314112909.png" width=500/>
+</center>
+<h5 id="b-总结-2">b.总结</h5>
+<p>LSTM有3个门，遗忘门，输入门和输出门</p>
+<p>朴素RNN把之前时间步的信息都一股脑存储在隐状态，隐状态就成了整个网络的瓶颈。LSTM的关键就是开辟了一个新的cell来存储记忆，相对于RNN多了一条获取以前信息的途径，因此能够<strong>缓解</strong>RNN梯度消失的问题</p>
+<blockquote>
+<p>虽然LSTM开辟新的cell来存储记忆，但这个记忆也会受到连续梯度相乘的影响，所以依然存在梯度消失或梯度爆炸的问题，但从实际效果来看，LSTM性能很不错，也很鲁棒</p>
+</blockquote>
+</blockquote>
+<p>3.GRU</p>
+<blockquote>
+<h5 id="a-模型与计算-2">a.模型与计算</h5>
+<p>GRU去掉了cell结构，且只设计了重置门和更新门</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314121125.png"/>
+<center class="half">
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314120738.png" width=500/>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314120717.png" width=500/>
+</center>
+<h5 id="b-结论">b.结论</h5>
+<p>GRU和LSTM的性能差不多，但GRU参数更少，更简单，所以训练效率更高。但是，如果数据的依赖特别长且数据量很大的话，LSTM的效果可能会稍微好一点，毕竟参数量更多。所以默认推荐使用LSTM</p>
+</blockquote>
+<p>4.其它解决梯度消失问题的策略</p>
+<blockquote>
+<h5 id="a-双向RNN-BI-RNN">a.双向RNN(BI-RNN)</h5>
+<ul>
+<li>
+<p>双向RNN，个从左往右，一个从右往左，两个RNN的参数是独立的。两层的参数输出concat一下给到隐藏层</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314121554.png" width=500/>
+</li>
+<li>
+<p>对于双向RNN某个时刻t，需要知道t时刻前的信息（Forward RNN），又需要知道t时刻之后的信息（Backward RNN）。所以双向RNN无法用于学习语言模型，因为语言模型只知道时刻t之前的信息，下一时刻的词需要模型来预测。</p>
+<blockquote>
+<p>其实也就是解释了，为啥子Encoder要用双向，而Decoder要用单向</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="b-多层RNN">b.多层RNN</h5>
+<p>通常来说，深度越大，性能越好，如果梯度下降能训练好的话</p>
+</blockquote>
+<p>5.That’s ALL</p>
+<blockquote>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314121938.png" width=600/>
+<p>通常来说，RNN深度越大，性能越好。But越深的话梯度消失可能比较严重，串行计算而非并行化计算</p>
+</blockquote>
+<h2 id="4-Translation-Seq2Seq-Attention">4.Translation, Seq2Seq, Attention</h2>
+<p>1.统计机器翻译SMT</p>
+<blockquote>
+<p>统计机器翻译非常复杂，有很多的子模块，需要很多的人工干预和特征工程。</p>
+</blockquote>
+<p>2.Seq2seq</p>
+<blockquote>
+<p>Seq2seq由Encoder和Decoder两部分组成。</p>
+<h5 id="Encoder">Encoder</h5>
+<p>Encoder RNN负责对源语言进行编码，学习源语言的隐含特征。Encoder RNN的最后一个神经元的隐状态作为Decoder RNN的初始隐状态。</p>
+<h5 id="Decoder">Decoder</h5>
+<p>Decoder RNN是一个条件语言模型，一方面它是一个语言模型，即用来生成目标语言的；另一方面，它的初始隐状态是基于Encoder RNN的输出，所以称Decoder RNN是条件语言模型。</p>
+<p>Decoder RNN在预测的时候，需要把上一个神经元的输出作为下一个神经元的输入，不断的预测下一个词，直到预测输出了结束标志符<code>&lt;END&gt;</code>，预测结束。</p>
+<h5 id="小结">小结</h5>
+<p>Encoder RNN的输入是<strong>源语言</strong>的word embeding，Decoder RNN的输入是<strong>目标语言</strong>的word embeding</p>
+<p>seq2seq的训练过程端到端的，也即EN作为整体来训练，也可以单独做，效果不一定有整体好</p>
+</blockquote>
+<p>3.BeamSearch</p>
+<blockquote>
+<h5 id="引子">引子</h5>
+<p>Naive版本的Seq2seq的预测过程采取的是贪心策略，即在Decoder RNN的每一步都选择概率最大的词作为结果。But，每一步最优不一定是全局最优，因此翻译出来的对话不一定是最好的。若是采用穷举，那时间或者算力上来说都是不经济的。</p>
+<h5 id="正片">正片</h5>
+<p>Beam search搜索策略是贪心策略和穷举策略的一个折中方案，(假设每一步输出n个结果，n&gt;k)它在预测的每一个时间步都保留top-k个结果，将这k个预测输入到下一个时间步，得到k*n个结果。从这kn个结果中选出打分最高的k个，再输入下一个时间步…指导结束，最后回溯即可得到这个方法下的最优路径</p>
+<blockquote>
+<ul>
+<li>a.注意，这里的<strong>打分</strong>是指从预测开始到结束，<strong>一整条路径打分</strong></li>
+</ul>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314225212.png" width=500/>
+<ul>
+<li>
+<p>b.注意<strong>beam search作为一种剪枝策略，并不能保证得到全局最优解</strong>，但它能以较大的概率得到全局最优解，同时相比于穷举搜索极大的提高了搜索效率。(k取1就是贪心策略，k取n就是穷举策略)</p>
+</li>
+<li>
+<p>c.注意beam search过程中，不同路径预测输出结束标志符<code>&lt;END&gt;</code>的时间点可能不一样，提前结束的路径称为完全路径。暂时把这些完全路径放一边，其他路径接着beam search。<strong>beam search的停止条件有很多种，可以设置一个最大的搜索时间步数，也可以设置收集到的最多的完全路径数。</strong></p>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>4.BLEU评价指标</p>
+<blockquote>
+<p>Bilingual Evaluation Understudy, BLEU</p>
+<p>BLEU衡量机器翻译结果和人类的标注答案的n-gram的overlap，overlap越多，打分就越高</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314233749.png" align=left width=800/>
+<p>也就是<code>分子=min（n-gram在所有参考答案句子中出现次数最大值，n-gram在结果c中出现的次数）</code></p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314234039.png" align=left width=800 />
+<p>论文中对于BLEU的讲解↓</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220314234205.png" width=700/>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://newblog.leohu.me/">Jlthzy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://newblog.leohu.me/">https://newblog.leohu.me/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">此文章版权归Jlthzy所有，如有转载，请注明原作者</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95/">考研复试</a><a class="post-meta__tags" href="/tags/cs224n/">cs224n</a></div><div class="post_share"><div class="social-share" data-image="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/14/f_leetcode%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92(%E4%B8%80)/"><img class="prev-cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">动态规划习题集锦（一）</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/11/f_%E7%BB%8F%E5%85%B8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%80%BB%E7%BB%93/"><img class="next-cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">经典CNN总结</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/09/cs231n优化器BN/" title="cs231n之BN/优化器"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-09</div><div class="title">cs231n之BN/优化器</div></div></a></div><div><a href="/2022/03/07/cs231n课程要点记录/" title="cs231n之激活函数/数据预处理/权重初始化/"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-07</div><div class="title">cs231n之激活函数/数据预处理/权重初始化/</div></div></a></div><div><a href="/2022/03/11/f_经典卷积神经网络总结/" title="经典CNN总结"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-11</div><div class="title">经典CNN总结</div></div></a></div><div><a href="/2022/03/14/f_leetcode动态规划(一)/" title="动态规划习题集锦（一）"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">动态规划习题集锦（一）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Jlthzy</div><div class="author-info__description">当我拥着光亮 环着希望</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">22</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">分享学习和生活</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">CS224N课程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E6%80%A7%E7%9A%84%E6%A6%82%E5%BF%B5%E8%AE%B0%E5%BD%95-%E6%9B%B4%E6%96%B0ing"><span class="toc-number">2.1.</span> <span class="toc-text">1.基础性的概念记录(更新ing)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-%E5%BC%95%E5%AD%90"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">a.引子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-%E6%80%BB%E7%BB%93"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">b.总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Language-Models-and-RNNs"><span class="toc-number">2.2.</span> <span class="toc-text">2.Language Models and RNNs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Vanishing-Gradients-Fancy-RNNs"><span class="toc-number">2.3.</span> <span class="toc-text">3.Vanishing Gradients, Fancy RNNs</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1"><span class="toc-number">2.3.0.0.1.</span> <span class="toc-text">a.梯度消失</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-number">2.3.0.0.2.</span> <span class="toc-text">b.梯度爆炸</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c-%E6%80%BB%E7%BB%93"><span class="toc-number">2.3.0.0.3.</span> <span class="toc-text">c.总结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#a-%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%AE%A1%E7%AE%97"><span class="toc-number">2.3.0.0.4.</span> <span class="toc-text">a.模型与计算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-%E6%80%BB%E7%BB%93-2"><span class="toc-number">2.3.0.0.5.</span> <span class="toc-text">b.总结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#a-%E6%A8%A1%E5%9E%8B%E4%B8%8E%E8%AE%A1%E7%AE%97-2"><span class="toc-number">2.3.0.0.6.</span> <span class="toc-text">a.模型与计算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-%E7%BB%93%E8%AE%BA"><span class="toc-number">2.3.0.0.7.</span> <span class="toc-text">b.结论</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#a-%E5%8F%8C%E5%90%91RNN-BI-RNN"><span class="toc-number">2.3.0.0.8.</span> <span class="toc-text">a.双向RNN(BI-RNN)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b-%E5%A4%9A%E5%B1%82RNN"><span class="toc-number">2.3.0.0.9.</span> <span class="toc-text">b.多层RNN</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Translation-Seq2Seq-Attention"><span class="toc-number">2.4.</span> <span class="toc-text">4.Translation, Seq2Seq, Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Encoder"><span class="toc-number">2.4.0.0.1.</span> <span class="toc-text">Encoder</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Decoder"><span class="toc-number">2.4.0.0.2.</span> <span class="toc-text">Decoder</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.4.0.0.3.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">2.4.0.0.4.</span> <span class="toc-text">引子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A3%E7%89%87"><span class="toc-number">2.4.0.0.5.</span> <span class="toc-text">正片</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/03/14/f_leetcode%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92(%E4%B8%80)/" title="动态规划习题集锦（一）"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="动态规划习题集锦（一）"/></a><div class="content"><a class="title" href="/2022/03/14/f_leetcode%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92(%E4%B8%80)/" title="动态规划习题集锦（一）">动态规划习题集锦（一）</a><time datetime="2022-03-14T15:49:04.168Z" title="发表于 2022-03-14 23:49:04">2022-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/14/cs224n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/" title="cs224n课程笔记"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="cs224n课程笔记"/></a><div class="content"><a class="title" href="/2022/03/14/cs224n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/" title="cs224n课程笔记">cs224n课程笔记</a><time datetime="2022-03-14T15:48:52.374Z" title="发表于 2022-03-14 23:48:52">2022-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/11/f_%E7%BB%8F%E5%85%B8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%80%BB%E7%BB%93/" title="经典CNN总结"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="经典CNN总结"/></a><div class="content"><a class="title" href="/2022/03/11/f_%E7%BB%8F%E5%85%B8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%80%BB%E7%BB%93/" title="经典CNN总结">经典CNN总结</a><time datetime="2022-03-10T16:15:18.797Z" title="发表于 2022-03-11 00:15:18">2022-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/09/cs231n%E4%BC%98%E5%8C%96%E5%99%A8BN/" title="cs231n之BN/优化器"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="cs231n之BN/优化器"/></a><div class="content"><a class="title" href="/2022/03/09/cs231n%E4%BC%98%E5%8C%96%E5%99%A8BN/" title="cs231n之BN/优化器">cs231n之BN/优化器</a><time datetime="2022-03-09T15:57:48.377Z" title="发表于 2022-03-09 23:57:48">2022-03-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/07/cs231n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/" title="cs231n之激活函数/数据预处理/权重初始化/"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="cs231n之激活函数/数据预处理/权重初始化/"/></a><div class="content"><a class="title" href="/2022/03/07/cs231n%E8%AF%BE%E7%A8%8B%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95/" title="cs231n之激活函数/数据预处理/权重初始化/">cs231n之激活函数/数据预处理/权重初始化/</a><time datetime="2022-03-07T15:49:19.960Z" title="发表于 2022-03-07 23:49:19">2022-03-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Jlthzy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'MBDY7V1om4ojckkXw4CMedFn-9Nh9j0Va',
+      appKey: '1lgrge5zKxylgOiLQdo3SBYh',
+      placeholder: '留下你的评论',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
