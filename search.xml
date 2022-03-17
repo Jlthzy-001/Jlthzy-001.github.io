@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>通道注意力机制 SEnet/ECAnet</title>
+      <link href="/2022/03/18/f_%E9%80%9A%E9%81%93%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6SE&amp;ECA/"/>
+      <url>/2022/03/18/f_%E9%80%9A%E9%81%93%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6SE&amp;ECA/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-ECAnet论文">1.ECAnet论文</h2><h3 id="引子">引子</h3><p>ECAnet其实是SEnet的升级变种，ECAnet的核心思想有两个：</p><p><strong>一是在获取注意力的过程中不对全局平均池化后的1x1xC的长向量进行降维处理</strong></p><blockquote><p>降维会丢失信息，降低模型性能，有实验证明</p></blockquote><p><strong>二是使用1x1xK的自适应卷积核进行局部跨通道信息交融来提高计算效率</strong></p><blockquote><p>因为引入通道注意力机制本身就会引入额外的计算量，作者的关注点在于能否找到一种经济高效的方式来计算通道注意力</p></blockquote><h3 id="一-综述">(一) 综述</h3><p>通道注意力在提升模型性能方面潜力巨大，SEnet就是其中具有代表性的一种结构，其通过学习卷积块的通道注意，为多个深度CNN带来了清晰可见的性能增益。在这之后，有不少改进SEnet的研究，比如捕获更加复杂的通道依赖或者结合空间注意力。尽管这些方法增加了模型预测的正确率，但是也带来更高的计算代价和负担。</p><p>因此，作者提出了一个问题：能否以更加有效的方式学习高效率的通道注意力机制</p><blockquote><p>注意：这里有两个有效，一是学习方式高效，二是通道注意力机制高效</p></blockquote><p>本篇论文工作总结如下：</p><blockquote><p>1.避免降维+合适的跨通道信息交融对于有效学习和产生高效通道注意力很重要</p><p>2.尝试为深度CNN设计一种权重更轻/少的(叫做ECA的)模块，在增加极少运算量的同时，明显增益模型性能</p><p>3.在ImageNet-1K以及MS COCO数据集上的结果表明ECAnet能比当年的SOTA模型的复杂度更低，但是性能却相当有竞争力。(也就是说，我计算量更低，但性能不必SOTA差，牛逼就完事儿了)</p></blockquote><h3 id="二-核心逻辑论证">(二) 核心逻辑论证</h3><p>论文对<strong>引子</strong>中提到的两个点进行了实验论证</p><h4 id="1-避免降低特征维度">1.避免降低特征维度</h4><p>SE-Var1~SE-Var3是SEnet的三个变种，本文实验中，作者在全局平均池化后没有对这三个变种均进行降维，但其Top1和Top5的正确率反而提高了，实验证明，<strong>避免降维是能够提高模型精度的</strong></p><blockquote><ul><li>SE-Var1没引入额外参数，也比Vanilla好，证明通道注意力是有用的</li><li>SE-Var2每个通道独立学习权重，效果比SE好，作者认为原因可能是通道和权重应当是直接相关联的，而不是像SEnet先降维再重新映射回原来的输入尺寸。</li><li>SE-Var2只用了一层FC层，还是证明了降维不行</li></ul></blockquote><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220317231230.png"/><h4 id="2-局部信息跨通道交融">2.局部信息跨通道交融</h4><p>作者提出了一种ECA模块，融合了“能够捕捉跨通道信息”和“解决组卷积的不同组之间丢失联系”的优点</p><p>使用1x1xK的卷积核对全局平均池化后的1x1xC的长向量就行卷积操作</p><blockquote><p>对于边缘上的1x1xC的长向量的值，采用K/2的padding</p><p>卷积操作使用这一个卷积核，类似于权值共享的性质，减少了参数的数量，</p></blockquote><p>也就是下图中这个带状举矩阵，进行的就是上面所说的卷积操作</p><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220317235506.png"/><p>现在来看文章开头的图，是不是更清晰了，对于ECAnet的整个流程，有了更为清晰的了解</p><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220318000133.png"/><h4 id="3-局部跨通道信息交融的范围-也就是1x1xK中的K的取值">3.局部跨通道信息交融的范围(也就是1x1xK中的K的取值)</h4><p>如果采取人工实验交叉验证实验的方式来确定每一个网络的最优K，会消耗很多计算机算力</p><p>作者设计了一个公式，使用非线性的映射来求自适应的K值</p><blockquote><p>下图中gamma和b的值分别是2和1，这是作者实验出来的</p></blockquote><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220318000536.png"/><p>来看这个图，使用了自适应的网络确实比人工派遣K值要好得多</p><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220318000737.png"/><h3 id="三-实验结果">(三) 实验结果</h3><p>没啥好说的，直接上图</p><p>基于几个经典的Backbone</p><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220318000859.png"/><p>看下来，InceptionV3是真的强</p><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220318000954.png"/>]]></content>
+      
+      
+      <categories>
+          
+          <category> 考研复试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 考研复试 </tag>
+            
+            <tag> cv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>动态规划习题集锦（二）</title>
       <link href="/2022/03/16/f_leetcode%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92(%E4%BA%8C)/"/>
       <url>/2022/03/16/f_leetcode%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92(%E4%BA%8C)/</url>
