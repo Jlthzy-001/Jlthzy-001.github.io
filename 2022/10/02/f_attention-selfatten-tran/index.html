@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Attention/Self-Attention/Transformer | Jlthzy's Blog</title><meta name="keywords" content="考研复试,nlp"><meta name="author" content="Jlthzy"><meta name="copyright" content="Jlthzy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="nlp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention&#x2F;Self-Attention&#x2F;Transformer">
+<meta property="og:url" content="https://newblog.leohu.me/2022/10/02/f_attention-selfatten-tran/index.html">
+<meta property="og:site_name" content="Jlthzy&#39;s Blog">
+<meta property="og:description" content="nlp">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg">
+<meta property="article:published_time" content="2022-10-02T07:01:41.754Z">
+<meta property="article:modified_time" content="2022-03-16T15:50:29.540Z">
+<meta property="article:author" content="Jlthzy">
+<meta property="article:tag" content="考研复试">
+<meta property="article:tag" content="nlp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://newblog.leohu.me/2022/10/02/f_attention-selfatten-tran/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Attention/Self-Attention/Transformer',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-16 08:50:29'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jlthzy's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Attention/Self-Attention/Transformer</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-02T07:01:41.754Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-16T15:50:29.540Z" title="更新于 2022-03-16 08:50:29">2022-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95/">考研复试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Attention/Self-Attention/Transformer"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>引子</h1>
+<h3 id="一些废话">一些废话</h3>
+<p>Attention真的好难，要说总结相关知识点，还真不知道从何写起，感觉太大又太广。写出来可能没啥质量，但不写的话，以后复习又得翻阅大量资料，效率太低。所以，还是打算好好准备下，写下这篇文章</p>
+<h3 id="参考文献">参考文献</h3>
+<p>为了写出这篇帖子，阅读了大量的文章，也算是取各家之长了，但是总还是感觉少了点什么，有时间还是得阅读下原始论文</p>
+<h1>Attention/Self-Attention/Transformers</h1>
+<h2 id="1-Attention">1.Attention</h2>
+<h3 id="a-What-is-Attention？">a. What is Attention？</h3>
+<p>Attention机制是一种通用的思想，不会局限于某一框架。</p>
+<p>从宏观来言，Attention起到的是一种解决遗忘，关注/突出重点的作用</p>
+<p>从概念上来理解，从大量信息中有选择地筛选出少量重要信息并聚焦到这些重要信息上，忽略大多不重要的信息</p>
+<p>具体到某一个项目来说…</p>
+<p>从种类来看，<strong>Spatial Attention 空间注意力</strong>和<strong>Temporal Attention 时间注意力</strong></p>
+<p>从实际应用来看，<strong>Soft Attention</strong>和<strong>Hard Attention</strong></p>
+<blockquote>
+<p><strong>Soft Attention是所有的数据都会注意，都会计算出相应的注意力权值，不会设置筛选条件</strong></p>
+<p><strong>Hard Attention会在生成注意力权重后筛选掉一部分不符合条件的注意力，让它的注意力权值为0，即可以理解为不再注意这些不符合条件的部分</strong></p>
+</blockquote>
+<h3 id="b-Why-Attention">b. Why Attention</h3>
+<h4 id="1-作用">1.作用</h4>
+<ul>
+<li>Attention机制解决了Seq2seq序列模型中Encoder最后一层隐藏层输出的信息瓶颈问题，解决了RNN的长程遗忘问题，对输入句子的部分词施加注意力从而使得预测更加准确，更加确信。</li>
+</ul>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220316224017.png" width=500/>
+<ul>
+<li>
+<p>有助于缓解梯度消失问题，因为Decoder的每一时间步都和所有Encoder的隐状态相连了，相当于某种捷径，减少了“中间商赚差价”</p>
+<blockquote>
+<p>这么理解，梯度消失还是有，缓解的是梯度消失对预测造成的影响，因为施加了attention，原来网络所存在的梯度消失问题带来的影响就不存在了</p>
+</blockquote>
+</li>
+<li>
+<p>有助于增加NMT的可解释性，解释为什么时刻t翻译输出了某个词，可以通过查看Attentioin distribution来解释</p>
+<blockquote>
+<p>Attentioin distribution也就是每个Encoder隐藏层的权重</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="2-朴素RNN存在的问题">2.朴素RNN存在的问题</h4>
+<p>Encoder-Decoder模型是注意力不集中的分心模型。</p>
+<p>下图中y是Decoder预测输出，而f是decoder的非线性变换函数。</p>
+<p>语义编码C是由输入句子X的每个单词经过Encoder 编码产生，而每一个y所使用的语义编码C都是一样，<strong>句子X中任意单词对生成某个目标单词y来说影响力都是相同的，没有任何区别</strong></p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220316231701.png"/>
+<p>引入Attention之后，<strong>原先都是相同的中间语义表示C会替换成根据当前生成单词而不断变化的Ci</strong>，<strong>理解AM模型的关键就是这里，即由固定的中间语义表示C换成了根据当前输出单词来调整成加入注意力模型的变化的Ci</strong></p>
+<h3 id="C-Details-in-Attention">C. Details in Attention</h3>
+<h4 id="1-Attention计算方式–原始论文">1.Attention计算方式–原始论文</h4>
+<p>step1：Deconder的输入隐层状态s和Encoder的每一个隐层状态h做concat，接着左乘权重矩阵，经过tanh函数后，与矩阵v求点积得到attention scores</p>
+<p>step2：attention scores再经过softmax函数，映射为概率，也就是Attentioin distribution</p>
+<p>step3：Attentioin distribution与Encoder隐层状态求加权和，得到该时刻Deconder的上下文向量c</p>
+<p>step4：上下午向量v再和Encoder隐层状态s做concat作为预测输入，求出该时刻的预测值</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220316233608.png"/>
+<h4 id="2-更流行的一种方法，同Transformer">2.更流行的一种方法，同Transformer</h4>
+<p>思路同上面这种方法，只是求相似度的计算形式不同罢了，一个意思。</p>
+<img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220316234204.png"/>
+ <img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/20220316235017.png"/>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://newblog.leohu.me">Jlthzy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://newblog.leohu.me">https://newblog.leohu.me</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">此文章版权归Jlthzy所有，如有转载，请注明原作者</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%80%83%E7%A0%94%E5%A4%8D%E8%AF%95/">考研复试</a><a class="post-meta__tags" href="/tags/nlp/">nlp</a></div><div class="post_share"><div class="social-share" data-image="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/10/02/f_eca_mobilenetv2%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%A7%A3/"><img class="prev-cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ECA_MobilenetV2代码详解</div></div></a></div><div class="next-post pull-right"><a href="/2022/10/02/fail2ban%E9%98%B2ssh%E6%9A%B4%E7%A0%B4/"><img class="next-cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">使用Fail2ban防ssh暴破</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/10/02/cs231n优化器BN/" title="cs231n之BN/优化器"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">cs231n之BN/优化器</div></div></a></div><div><a href="/2022/10/02/cs224n课程要点记录/" title="cs224n课程笔记"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">cs224n课程笔记</div></div></a></div><div><a href="/2022/10/02/cs231n课程要点记录/" title="cs231n之激活函数/数据预处理/权重初始化/"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">cs231n之激活函数/数据预处理/权重初始化/</div></div></a></div><div><a href="/2022/10/02/f_leetcode动态规划(一)/" title="动态规划习题集锦（一）"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">动态规划习题集锦（一）</div></div></a></div><div><a href="/2022/10/02/f_eca_mobilenetv2代码详解/" title="ECA_MobilenetV2代码详解"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">ECA_MobilenetV2代码详解</div></div></a></div><div><a href="/2022/10/02/f_经典卷积神经网络总结/" title="经典CNN总结"><img class="cover" src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">经典CNN总结</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Jlthzy</div><div class="author-info__description">当我拥着光亮 环着希望</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">分享学习和生活</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">引子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E5%BA%9F%E8%AF%9D"><span class="toc-number">1.0.1.</span> <span class="toc-text">一些废话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.0.2.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Attention&#x2F;Self-Attention&#x2F;Transformers</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Attention"><span class="toc-number">2.1.</span> <span class="toc-text">1.Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a-What-is-Attention%EF%BC%9F"><span class="toc-number">2.1.1.</span> <span class="toc-text">a. What is Attention？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#b-Why-Attention"><span class="toc-number">2.1.2.</span> <span class="toc-text">b. Why Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">1.作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9C%B4%E7%B4%A0RNN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">2.朴素RNN存在的问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Details-in-Attention"><span class="toc-number">2.1.3.</span> <span class="toc-text">C. Details in Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Attention%E8%AE%A1%E7%AE%97%E6%96%B9%E5%BC%8F%E2%80%93%E5%8E%9F%E5%A7%8B%E8%AE%BA%E6%96%87"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">1.Attention计算方式–原始论文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9B%B4%E6%B5%81%E8%A1%8C%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%8C%E5%90%8CTransformer"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">2.更流行的一种方法，同Transformer</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/02/%E9%A9%AC%E5%8E%9F_02%E9%A9%AC%E5%93%B2/" title="马原_02马哲"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="马原_02马哲"/></a><div class="content"><a class="title" href="/2022/10/02/%E9%A9%AC%E5%8E%9F_02%E9%A9%AC%E5%93%B2/" title="马原_02马哲">马原_02马哲</a><time datetime="2022-10-02T07:01:41.801Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/02/%E8%A1%A5%E7%A0%81%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3/" title="补码彻底理解"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="补码彻底理解"/></a><div class="content"><a class="title" href="/2022/10/02/%E8%A1%A5%E7%A0%81%E5%BD%BB%E5%BA%95%E7%90%86%E8%A7%A3/" title="补码彻底理解">补码彻底理解</a><time datetime="2022-10-02T07:01:41.798Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/02/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%80%83%E7%A0%94%E5%AD%A6%E9%95%BF%E5%88%86%E4%BA%AB%E4%BC%9A%E8%AE%B0%E5%BD%95/" title="第一次考研学长分享会记录"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一次考研学长分享会记录"/></a><div class="content"><a class="title" href="/2022/10/02/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%80%83%E7%A0%94%E5%AD%A6%E9%95%BF%E5%88%86%E4%BA%AB%E4%BC%9A%E8%AE%B0%E5%BD%95/" title="第一次考研学长分享会记录">第一次考研学长分享会记录</a><time datetime="2022-10-02T07:01:41.796Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/02/%E6%94%B6%E8%97%8F%E4%B8%80%E4%BA%9B%E4%B8%8D%E9%94%99%E7%9A%84%E5%A3%81%E7%BA%B8/" title="壁纸收藏"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/wallroom-3840x2160-bg-ce150ea.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="壁纸收藏"/></a><div class="content"><a class="title" href="/2022/10/02/%E6%94%B6%E8%97%8F%E4%B8%80%E4%BA%9B%E4%B8%8D%E9%94%99%E7%9A%84%E5%A3%81%E7%BA%B8/" title="壁纸收藏">壁纸收藏</a><time datetime="2022-10-02T07:01:41.794Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/02/%E6%90%AC%E8%BF%90iptable%E8%BD%AC%E5%8F%91%E8%84%9A%E6%9C%AC/" title="iptable转发脚本"><img src="https://fb-1259515475.cos.ap-hongkong.myqcloud.com/blog/pexels-abdullah-ghatasheh-1631677.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="iptable转发脚本"/></a><div class="content"><a class="title" href="/2022/10/02/%E6%90%AC%E8%BF%90iptable%E8%BD%AC%E5%8F%91%E8%84%9A%E6%9C%AC/" title="iptable转发脚本">iptable转发脚本</a><time datetime="2022-10-02T07:01:41.792Z" title="发表于 2022-10-02 00:01:41">2022-10-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Jlthzy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'MBDY7V1om4ojckkXw4CMedFn-9Nh9j0Va',
+      appKey: '1lgrge5zKxylgOiLQdo3SBYh',
+      placeholder: '留下你的评论',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
